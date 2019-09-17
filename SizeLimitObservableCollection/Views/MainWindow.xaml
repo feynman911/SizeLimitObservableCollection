@@ -1,0 +1,30 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ViewModels="clr-namespace:SizeLimitObservableCollection.ViewModels" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:Behaviors="clr-namespace:SizeLimitObservableCollection.Behaviors" mc:Ignorable="d" x:Class="SizeLimitObservableCollection.Views.MainWindow"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="400" Width="600" d:DataContext="{d:DesignInstance {x:Type ViewModels:MainWindowViewModel}}">
+    <Grid>
+        <DataGrid Margin="0,40,0,0" ItemsSource="{Binding LogCollection}" AutoGenerateColumns="False" GridLinesVisibility="None" AlternationCount="2" AlternatingRowBackground="Gainsboro" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Mode=OneWay}" ClipboardContentBinding="{x:Null}" Header="Log String" MinWidth="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,10,0,0">
+            <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding LogString}" VerticalAlignment="Center" Width="200" Margin="20,0,0,0">
+                <i:Interaction.Behaviors>
+                    <Behaviors:TextBoxEnterBindBehavior/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <Button Content="First" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding AddFirst, Mode=OneWay}"/>
+            <Button Content="Last" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="75" Command="{Binding AddLast, Mode=OneWay}"/>
+            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Margin="30,0,0,0" Text="Limit"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding Limit}" Width="40" Margin="5,0,0,0" VerticalAlignment="Center" TextAlignment="Right">
+                <i:Interaction.Behaviors>
+                    <Behaviors:TextBoxEnterBindBehavior/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </StackPanel>
+    </Grid>
+</Window>
